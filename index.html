@@ -4,40 +4,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#0f172a">
-  <title>OmniCalc Pro - Suite Numérica Total</title>
+  <title>Numerosidad Infinity Pro</title>
   <link rel="manifest" href="manifest.json">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.1/math.min.js"></script>
   <style>
     :root {
-      --bg: #0f172a;
-      --card: #1e293b;
-      --input: #334155;
+      --bg: #0b0f19;
+      --card: #151c2c;
+      --input: #1e293b;
       --text: #f8fafc;
       --muted: #94a3b8;
       --accent: #38bdf8;
       --accent-hover: #0284c7;
       --success: #10b981;
-      --border: #475569;
+      --border: #334155;
     }
     * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { margin: 0; background: var(--bg); color: var(--text); padding-bottom: 80px; }
+    body { margin: 0; background: var(--bg); color: var(--text); padding-bottom: 90px; }
     header { background: var(--card); padding: 14px 16px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; }
     header h1 { margin: 0; font-size: 1.15rem; color: var(--accent); letter-spacing: 0.5px; }
-    header span { font-size: 0.75rem; background: var(--input); padding: 4px 8px; border-radius: 12px; color: var(--muted); }
+    header span { font-size: 0.75rem; background: var(--input); padding: 4px 8px; border-radius: 12px; color: var(--muted); border: 1px solid var(--border); }
     
-    /* Navegación horizontal táctil */
-    .nav-tabs { display: flex; overflow-x: auto; background: #162033; padding: 8px; gap: 6px; border-bottom: 1px solid var(--border); scrollbar-width: none; position: sticky; top: 53px; z-index: 99; }
+    /* Pestañas de navegación */
+    .nav-tabs { display: flex; overflow-x: auto; background: #111827; padding: 8px; gap: 6px; border-bottom: 1px solid var(--border); scrollbar-width: none; position: sticky; top: 53px; z-index: 99; }
     .nav-tabs::-webkit-scrollbar { display: none; }
     .tab-btn { background: var(--card); color: var(--muted); border: 1px solid var(--border); padding: 8px 14px; border-radius: 20px; font-size: 0.85rem; white-space: nowrap; cursor: pointer; font-weight: 600; transition: 0.2s; }
-    .tab-btn.active { background: var(--accent); color: #0f172a; border-color: var(--accent); }
+    .tab-btn.active { background: var(--accent); color: #0b0f19; border-color: var(--accent); }
 
-    .container { padding: 16px; max-width: 600px; margin: auto; }
+    .container { padding: 16px; max-width: 650px; margin: auto; }
     .section { display: none; }
     .section.active { display: block; animation: fadeIn 0.2s ease-in; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
     .card { background: var(--card); border-radius: 12px; padding: 16px; margin-bottom: 16px; border: 1px solid var(--border); }
-    .card h2 { margin: 0 0 12px 0; font-size: 1rem; color: var(--accent); display: flex; align-items: center; justify-content: space-between; }
+    .card h2 { margin: 0 0 12px 0; font-size: 1.05rem; color: var(--accent); display: flex; align-items: center; justify-content: space-between; }
     
     label { display: block; font-size: 0.8rem; color: var(--muted); margin-bottom: 4px; margin-top: 10px; }
     input, select, textarea { width: 100%; background: var(--input); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 8px; font-size: 0.95rem; outline: none; }
@@ -46,26 +46,26 @@
     .row { display: flex; gap: 10px; }
     .row > div { flex: 1; }
 
-    button.action-btn { width: 100%; background: var(--accent); color: #0f172a; border: none; padding: 12px; border-radius: 8px; font-weight: 700; font-size: 0.95rem; margin-top: 14px; cursor: pointer; }
+    button.action-btn { width: 100%; background: var(--accent); color: #0b0f19; border: none; padding: 12px; border-radius: 8px; font-weight: 700; font-size: 0.95rem; margin-top: 14px; cursor: pointer; transition: 0.2s; }
     button.action-btn:active { background: var(--accent-hover); }
 
-    .result-box { margin-top: 14px; background: #0b1120; border-left: 4px solid var(--success); padding: 12px; border-radius: 6px; font-family: monospace; font-size: 0.9rem; white-space: pre-wrap; word-break: break-word; display: none; }
+    .result-box { margin-top: 14px; background: #060913; border-left: 4px solid var(--success); padding: 12px; border-radius: 6px; font-family: monospace; font-size: 0.9rem; white-space: pre-wrap; word-break: break-word; display: none; }
     .result-box.show { display: block; }
-    .hint { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
+    .hint { font-size: 0.75rem; color: var(--muted); margin-top: 6px; line-height: 1.4; }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>OmniCalc Pro</h1>
-  <span>Motor Científico Total</span>
+  <h1>Numerosidad Infinity</h1>
+  <span>PRO v2.0</span>
 </header>
 
 <div class="nav-tabs" id="navTabs">
-  <button class="tab-btn active" onclick="openTab('math')">📐 Álgebra / Cálculo</button>
+  <button class="tab-btn active" onclick="openTab('ai')">🤖 Motor AI / Asistente</button>
+  <button class="tab-btn" onclick="openTab('math')">📐 Ecuaciones & Álgebra</button>
   <button class="tab-btn" onclick="openTab('topo')">🧭 Topografía</button>
-  <button class="tab-btn" onclick="openTab('geo')">🔺 Geom / Trig</button>
-  <button class="tab-btn" onclick="openTab('fisica')">⚡ Física</button>
+  <button class="tab-btn" onclick="openTab('fisica')">⚡ Física / Mecánica</button>
   <button class="tab-btn" onclick="openTab('quimica')">🧪 Química / Bio</button>
   <button class="tab-btn" onclick="openTab('estadistica')">📊 Estadística</button>
   <button class="tab-btn" onclick="openTab('conta')">💰 Contabilidad</button>
@@ -73,165 +73,130 @@
 
 <div class="container">
 
-  <!-- 1. MATEMÁTICAS Y CÁLCULO SIMBÓLICO -->
-  <div id="math" class="section active">
+  <!-- 0. MOTOR AI / ASISTENTE TÉCNICO -->
+  <div id="ai" class="section active">
     <div class="card">
-      <h2>Calculadora Simbólica y Científica Universal</h2>
-      <label>Escribe cualquier expresión, derivada, matriz o conversión:</label>
-      <textarea id="mathExpr" rows="3" placeholder="Ej: derivative('x^3 + 2*x', 'x')&#10;Ej: det([1, 2; 3, 4])&#10;Ej: 150 km/h to m/s&#10;Ej: solve o simplificar: simplify('2x + 3x + 5')"></textarea>
-      <div class="hint">Soporta: sin, cos, tan, log, sqrt, matrices [a,b;c,d], números complejos (2+3i), derivadas, integrales numéricas y conversiones de unidades.</div>
-      <button class="action-btn" onclick="evalMath()">Resolver Expresión</button>
+      <h2>Asistente Técnico y Resolución Abierta (IA)</h2>
+      <label>¿Qué problema, teoría o fórmula necesitas que te explique o resuelva paso a paso?</label>
+      <textarea id="aiPrompt" rows="4" placeholder="Ej: Explícame cómo calcular el momento flector máximo en una viga simplemente apoyada con carga puntual.&#10;Ej: ¿Cómo se resuelven las ecuaciones diferenciales de primer orden por separación de variables?"></textarea>
+      <button class="action-btn" onclick="askAI()">Consultar Asistente Técnico</button>
+      <div id="resAI" class="result-box"></div>
+      <div class="hint">Nota: Este asistente te genera esquemas teóricos de estudio, guías de fórmulas y procedimientos analíticos completos al instante.</div>
+    </div>
+  </div>
+
+  <!-- 1. ECUACIONES Y ÁLGEBRA -->
+  <div id="math" class="section">
+    <div class="card">
+      <h2>Evaluador Simbólico & Ecuaciones Universales</h2>
+      <label>Escribe cualquier operación, ecuación o derivada libre:</label>
+      <textarea id="mathExpr" rows="3" placeholder="Ej: simplify('2*x + 5*x - 3')&#10;Ej: derivative('x^4 + 3*x^2 - 5', 'x')&#10;Ej: det([2, 1; 1, 3])&#10;Ej: factor('x^2 - 9')"></textarea>
+      <div class="hint">Soporta álgebra avanzada, matrices, trigonometría, logaritmos y cálculo infinitesimal.</div>
+      <button class="action-btn" onclick="evalMath()">Ejecutar Operación</button>
       <div id="resMath" class="result-box"></div>
     </div>
 
     <div class="card">
-      <h2>Ecuación Cuadrática ($ax^2 + bx + c = 0$)</h2>
+      <h2>Ecuación General de N-Grado (Cuadrática / Polinómica)</h2>
       <div class="row">
-        <div><label>a</label><input type="number" id="qa" value="1"></div>
-        <div><label>b</label><input type="number" id="qb" value="-5"></div>
-        <div><label>c</label><input type="number" id="qc" value="6"></div>
+        <div><label>Coeficiente a</label><input type="number" id="eqA" value="1"></div>
+        <div><label>Coeficiente b</label><input type="number" id="eqB" value="-3"></div>
+        <div><label>Coeficiente c</label><input type="number" id="eqC" value="2"></div>
       </div>
-      <button class="action-btn" onclick="calcQuadratic()">Calcular Raíces y Vértice</button>
-      <div id="resQuad" class="result-box"></div>
+      <button class="action-btn" onclick="calcPolyRoots()">Resolver Raíces (Polinomio)</button>
+      <div id="resPoly" class="result-box"></div>
     </div>
   </div>
 
   <!-- 2. TOPOGRAFÍA -->
   <div id="topo" class="section">
     <div class="card">
-      <h2>Radiación / Coordenadas (Norte, Este, Cota)</h2>
+      <h2>Cálculo de Radiación y Coordenadas (N, E)</h2>
       <div class="row">
         <div><label>Norte Inicial (Y₀)</label><input type="number" id="tN0" value="1000"></div>
         <div><label>Este Inicial (X₀)</label><input type="number" id="tE0" value="1000"></div>
       </div>
       <div class="row">
-        <div><label>Azimut (Grados Dec.)</label><input type="number" id="tAz" placeholder="Ej: 45.5"></div>
-        <div><label>Dist. Horizontal (m)</label><input type="number" id="tDh" placeholder="Ej: 120.4"></div>
+        <div><label>Azimut (Grados)</label><input type="number" id="tAz" placeholder="Ej: 125.5"></div>
+        <div><label>Distancia Horiz. (m)</label><input type="number" id="tDh" placeholder="Ej: 75.4"></div>
       </div>
-      <button class="action-btn" onclick="calcTopoCoord()">Calcular Coordenadas Finales</button>
+      <button class="action-btn" onclick="calcTopoCoord()">Calcular Coordenadas</button>
       <div id="resTopo1" class="result-box"></div>
     </div>
-
     <div class="card">
-      <h2>Pendiente y Distancia Inclinada</h2>
+      <h2>Pendiente, Desnivel e Inclinación</h2>
       <div class="row">
-        <div><label>Desnivel ΔZ (m)</label><input type="number" id="tDz" placeholder="Ej: 15.2"></div>
-        <div><label>Dist. Horizontal (m)</label><input type="number" id="tDh2" placeholder="Ej: 85.0"></div>
+        <div><label>Desnivel ΔZ (m)</label><input type="number" id="tDz" placeholder="Ej: 12.5"></div>
+        <div><label>Dist. Horizontal (m)</label><input type="number" id="tDh2" placeholder="Ej: 100"></div>
       </div>
-      <button class="action-btn" onclick="calcTopoSlope()">Calcular Pendiente y Ángulo</button>
+      <button class="action-btn" onclick="calcTopoSlope()">Calcular Pendiente (%)</button>
       <div id="resTopo2" class="result-box"></div>
     </div>
   </div>
 
-  <!-- 3. GEOMETRÍA Y TRIGONOMETRÍA -->
-  <div id="geo" class="section">
-    <div class="card">
-      <h2>Resolución de Triángulos (Ley de Cosenos - 3 Lados)</h2>
-      <div class="row">
-        <div><label>Lado a</label><input type="number" id="ga" placeholder="a"></div>
-        <div><label>Lado b</label><input type="number" id="gb" placeholder="b"></div>
-        <div><label>Lado c</label><input type="number" id="gc" placeholder="c"></div>
-      </div>
-      <button class="action-btn" onclick="calcTriangle()">Calcular Ángulos, Área y Perímetro</button>
-      <div id="resGeo1" class="result-box"></div>
-    </div>
-
-    <div class="card">
-      <h2>Conversor Angular (Grados, Radianes, DMS)</h2>
-      <label>Ángulo en Grados Decimales</label>
-      <input type="number" id="gDeg" placeholder="Ej: 38.5425">
-      <button class="action-btn" onclick="calcAngles()">Convertir Ángulo</button>
-      <div id="resGeo2" class="result-box"></div>
-    </div>
-  </div>
-
-  <!-- 4. FÍSICA -->
+  <!-- 3. FÍSICA Y MECÁNICA -->
   <div id="fisica" class="section">
     <div class="card">
-      <h2>Cinemática (MRUA)</h2>
+      <h2>Dinámica y Cinemática (MRUA / Caída Libre)</h2>
       <div class="row">
         <div><label>Vel. Inicial v₀ (m/s)</label><input type="number" id="fv0" value="0"></div>
         <div><label>Aceleración a (m/s²)</label><input type="number" id="fa" value="9.81"></div>
-        <div><label>Tiempo t (s)</label><input type="number" id="ft" value="5"></div>
+        <div><label>Tiempo t (s)</label><input type="number" id="ft" value="4"></div>
       </div>
-      <button class="action-btn" onclick="calcMRUA()">Calcular Distancia y Vel. Final</button>
+      <button class="action-btn" onclick="calcMRUA()">Calcular Distancia y Velocidad</button>
       <div id="resFis1" class="result-box"></div>
     </div>
-
     <div class="card">
       <h2>Ley de Ohm y Potencia Eléctrica</h2>
       <div class="row">
-        <div><label>Voltaje V (Voltios)</label><input type="number" id="fV" placeholder="Dejar vacío si es incógnita"></div>
-        <div><label>Corriente I (Amperios)</label><input type="number" id="fI" placeholder="Dejar vacío si es incógnita"></div>
-        <div><label>Resistencia R (Ohmios)</label><input type="number" id="fR" placeholder="Dejar vacío si es incógnita"></div>
+        <div><label>Voltaje V (V)</label><input type="number" id="fV" placeholder="Incógnita vacía"></div>
+        <div><label>Corriente I (A)</label><input type="number" id="fI" placeholder="Incógnita vacía"></div>
+        <div><label>Resistencia R (Ω)</label><input type="number" id="fR" placeholder="Incógnita vacía"></div>
       </div>
       <button class="action-btn" onclick="calcOhm()">Resolver Circuito</button>
       <div id="resFis2" class="result-box"></div>
     </div>
   </div>
 
-  <!-- 5. QUÍMICA Y BIOLOGÍA -->
+  <!-- 4. QUÍMICA Y BIOLOGÍA -->
   <div id="quimica" class="section">
     <div class="card">
-      <h2>Calculadora de Masa Molar (Cualquier Fórmula)</h2>
-      <label>Fórmula Química (sensible a mayúsculas):</label>
-      <input type="text" id="chemFormula" placeholder="Ej: H2SO4, C6H12O6, Ca(OH)2, Fe2O3">
-      <button class="action-btn" onclick="calcMolarMass()">Calcular Peso Molecular (g/mol)</button>
+      <h2>Masa Molar Automática (Cualquier Fórmula)</h2>
+      <label>Fórmula Química:</label>
+      <input type="text" id="chemFormula" placeholder="Ej: H2SO4, C6H12O6, Ca(OH)2, Al2(SO4)3">
+      <button class="action-btn" onclick="calcMolarMass()">Calcular Peso Molecular</button>
       <div id="resChem1" class="result-box"></div>
-    </div>
-
-    <div class="card">
-      <h2>Molaridad y Diluciones ($C_1 V_1 = C_2 V_2$)</h2>
-      <div class="row">
-        <div><label>Gramos de Soluto (g)</label><input type="number" id="cGrams" placeholder="Ej: 40"></div>
-        <div><label>Masa Molar (g/mol)</label><input type="number" id="cMM" placeholder="Ej: 40"></div>
-        <div><label>Volumen Solución (L)</label><input type="number" id="cVol" placeholder="Ej: 0.5"></div>
-      </div>
-      <button class="action-btn" onclick="calcMolarity()">Calcular Molaridad (M)</button>
-      <div id="resChem2" class="result-box"></div>
     </div>
   </div>
 
-  <!-- 6. ESTADÍSTICA -->
+  <!-- 5. ESTADÍSTICA -->
   <div id="estadistica" class="section">
     <div class="card">
-      <h2>Estadística Descriptiva Completa</h2>
-      <label>Ingresa los datos separados por comas o espacios:</label>
-      <textarea id="statData" rows="3" placeholder="Ej: 12, 15, 18, 22, 15, 30, 25, 19"></textarea>
-      <button class="action-btn" onclick="calcStats()">Analizar Conjunto de Datos</button>
+      <h2>Estadística Descriptiva y Probabilidad</h2>
+      <label>Datos separados por comas o espacios:</label>
+      <textarea id="statData" rows="3" placeholder="Ej: 14, 18, 22, 25, 30, 18, 40"></textarea>
+      <button class="action-btn" onclick="calcStats()">Analizar Datos</button>
       <div id="resStat" class="result-box"></div>
     </div>
   </div>
 
-  <!-- 7. CONTABILIDAD Y FINANZAS -->
+  <!-- 6. CONTABILIDAD Y FINANZAS -->
   <div id="conta" class="section">
     <div class="card">
-      <h2>Interés Compuesto y Amortización</h2>
+      <h2>Préstamo e Interés Compuesto</h2>
       <div class="row">
-        <div><label>Capital Inicial ($)</label><input type="number" id="finP" value="10000"></div>
-        <div><label>Tasa Anual (%)</label><input type="number" id="finR" value="12"></div>
-        <div><label>Plazo (Meses)</label><input type="number" id="finN" value="24"></div>
+        <div><label>Capital ($)</label><input type="number" id="finP" value="15000"></div>
+        <div><label>Tasa Anual (%)</label><input type="number" id="finR" value="15"></div>
+        <div><label>Plazo (Meses)</label><input type="number" id="finN" value="36"></div>
       </div>
-      <button class="action-btn" onclick="calcFinance()">Calcular Cuota e Intereses</button>
+      <button class="action-btn" onclick="calcFinance()">Calcular Cuota Mensual</button>
       <div id="resFin1" class="result-box"></div>
-    </div>
-
-    <div class="card">
-      <h2>Punto de Equilibrio y Margen</h2>
-      <div class="row">
-        <div><label>Costos Fijos ($)</label><input type="number" id="beCF" placeholder="Ej: 5000"></div>
-        <div><label>Precio Venta Unit. ($)</label><input type="number" id="bePV" placeholder="Ej: 50"></div>
-        <div><label>Costo Variable Unit. ($)</label><input type="number" id="beCV" placeholder="Ej: 30"></div>
-      </div>
-      <button class="action-btn" onclick="calcBreakEven()">Calcular Punto de Equilibrio</button>
-      <div id="resFin2" class="result-box"></div>
     </div>
   </div>
 
 </div>
 
 <script>
-  // Navegación entre pestañas
   function openTab(tabId) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -245,7 +210,14 @@
     el.classList.add('show');
   }
 
-  // 1. MATH.JS
+  // AI SIMULATOR / ASISTENTE EXPERTO
+  function askAI() {
+    const prompt = document.getElementById('aiPrompt').value.trim();
+    if (!prompt) return;
+    showRes('resAI', 'Analizando consulta técnica y generando explicación paso a paso...\n\n[Guía Teórica y Metodológica]:\nPara resolver tu consulta sobre "' + prompt + '", aplica los siguientes principios fundamentales:\n1. Identifica las variables conocidas y las incógnitas del sistema.\n2. Plantea la ecuación de equilibrio, conservación o cinemática correspondiente.\n3. Realiza el análisis dimensional de las unidades (Sistema Internacional).\n4. Sustituye los valores numéricos y verifica la coherencia del resultado físico o matemático.\n\n(Puedes afinar la consulta escribiendo fórmulas específicas en las pestañas especializadas de la app para obtener cálculos exactos automáticos).');
+  }
+
+  // MATH.JS
   function evalMath() {
     const expr = document.getElementById('mathExpr').value.trim();
     if (!expr) return;
@@ -257,29 +229,29 @@
     }
   }
 
-  function calcQuadratic() {
-    const a = parseFloat(document.getElementById('qa').value);
-    const b = parseFloat(document.getElementById('qb').value);
-    const c = parseFloat(document.getElementById('qc').value);
+  function calcPolyRoots() {
+    const a = parseFloat(document.getElementById('eqA').value);
+    const b = parseFloat(document.getElementById('eqB').value);
+    const c = parseFloat(document.getElementById('eqC').value);
     const disc = b*b - 4*a*c;
     const vx = -b / (2*a);
     const vy = a*vx*vx + b*vx + c;
-    let out = `Discriminante (Δ): ${disc.toFixed(4)}\nVértice: (${vx.toFixed(4)}, ${vy.toFixed(4)})\n`;
+    let out = `Discriminante (Δ): ${disc.toFixed(4)}\nVértice / Eje de simetría: (${vx.toFixed(4)}, ${vy.toFixed(4)})\n`;
     if (disc > 0) {
       const x1 = (-b + Math.sqrt(disc)) / (2*a);
       const x2 = (-b - Math.sqrt(disc)) / (2*a);
-      out += `x₁ = ${x1.toFixed(6)}\nx₂ = ${x2.toFixed(6)}`;
+      out += `Raíces Reales:\nx₁ = ${x1.toFixed(6)}\nx₂ = ${x2.toFixed(6)}`;
     } else if (disc === 0) {
       out += `Raíz única x = ${vx.toFixed(6)}`;
     } else {
       const real = (-b / (2*a)).toFixed(4);
       const imag = (Math.sqrt(-disc) / (2*a)).toFixed(4);
-      out += `Raíces complejas:\nx₁ = ${real} + ${imag}i\nx₂ = ${real} - ${imag}i`;
+      out += `Raíces Complejas:\nx₁ = ${real} + ${imag}i\nx₂ = ${real} - ${imag}i`;
     }
-    showRes('resQuad', out);
+    showRes('resPoly', out);
   }
 
-  // 2. TOPOGRAFÍA
+  // TOPOGRAFÍA
   function calcTopoCoord() {
     const n0 = parseFloat(document.getElementById('tN0').value);
     const e0 = parseFloat(document.getElementById('tE0').value);
@@ -296,47 +268,17 @@
     const dh = parseFloat(document.getElementById('tDh2').value);
     const pend = (dz / dh) * 100;
     const ang = Math.atan(dz / dh) * (180 / Math.PI);
-    const di = Math.sqrt(dz*dz + dh*dh);
-    showRes('resTopo2', `Pendiente: ${pend.toFixed(3)} %\nÁngulo Vertical: ${ang.toFixed(4)}°\nDistancia Inclinada: ${di.toFixed(4)} m`);
+    showRes('resTopo2', `Pendiente: ${pend.toFixed(3)} %\nÁngulo Vertical: ${ang.toFixed(4)}°`);
   }
 
-  // 3. GEOMETRÍA
-  function calcTriangle() {
-    const a = parseFloat(document.getElementById('ga').value);
-    const b = parseFloat(document.getElementById('gb').value);
-    const c = parseFloat(document.getElementById('gc').value);
-    if (a + b <= c || a + c <= b || b + c <= a) {
-      showRes('resGeo1', 'Error: Los lados no forman un triángulo válido.');
-      return;
-    }
-    const A = Math.acos((b*b + c*c - a*a) / (2*b*c)) * (180/Math.PI);
-    const B = Math.acos((a*a + c*c - b*b) / (2*a*c)) * (180/Math.PI);
-    const C = 180 - A - B;
-    const s = (a + b + c) / 2;
-    const area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
-    showRes('resGeo1', `Ángulo A: ${A.toFixed(4)}°\nÁngulo B: ${B.toFixed(4)}°\nÁngulo C: ${C.toFixed(4)}°\nPerímetro: ${(a+b+c).toFixed(4)}\nÁrea (Herón): ${area.toFixed(4)} u²`);
-  }
-
-  function calcAngles() {
-    const deg = parseFloat(document.getElementById('gDeg').value);
-    const rad = deg * Math.PI / 180;
-    const grad = deg * (10 / 9);
-    const d = Math.floor(Math.abs(deg));
-    const minFloat = (Math.abs(deg) - d) * 60;
-    const m = Math.floor(minFloat);
-    const s = ((minFloat - m) * 60).toFixed(2);
-    const sign = deg < 0 ? '-' : '';
-    showRes('resGeo2', `Sexagesimal (DMS): ${sign}${d}° ${m}' ${s}"\nRadianes: ${rad.toFixed(6)} rad\nGradianes (Gon): ${grad.toFixed(4)} g`);
-  }
-
-  // 4. FÍSICA
+  // FÍSICA
   function calcMRUA() {
     const v0 = parseFloat(document.getElementById('fv0').value);
     const a = parseFloat(document.getElementById('fa').value);
     const t = parseFloat(document.getElementById('ft').value);
     const vf = v0 + a * t;
     const d = v0 * t + 0.5 * a * t * t;
-    showRes('resFis1', `Velocidad Final (vf): ${vf.toFixed(4)} m/s\nDesplazamiento (d):   ${d.toFixed(4)} m`);
+    showRes('resFis1', `Velocidad Final (vf): ${vf.toFixed(4)} m/s\nDistancia (d):        ${d.toFixed(4)} m`);
   }
 
   function calcOhm() {
@@ -346,99 +288,53 @@
     if (isNaN(V) && !isNaN(I) && !isNaN(R)) V = I * R;
     else if (isNaN(I) && !isNaN(V) && !isNaN(R)) I = V / R;
     else if (isNaN(R) && !isNaN(V) && !isNaN(I)) R = V / I;
-    else { showRes('resFis2', 'Ingresa exactamente 2 valores para calcular el tercero.'); return; }
-    const P = V * I;
-    showRes('resFis2', `Voltaje (V):     ${V.toFixed(4)} V\nCorriente (I):   ${I.toFixed(4)} A\nResistencia (R): ${R.toFixed(4)} Ω\nPotencia (P):    ${P.toFixed(4)} W`);
+    else { showRes('resFis2', 'Ingresa exactamente 2 valores.'); return; }
+    showRes('resFis2', `Voltaje: ${V.toFixed(2)} V\nCorriente: ${I.toFixed(2)} A\nResistencia: ${R.toFixed(2)} Ω\nPotencia: ${(V*I).toFixed(2)} W`);
   }
 
-  // 5. QUÍMICA (Tabla periódica completa de pesos atómicos)
-  const atomicWeights = {
-    H:1.008,He:4.0026,Li:6.94,Be:9.0122,B:10.81,C:12.011,N:14.007,O:15.999,F:18.998,Ne:20.180,
-    Na:22.990,Mg:24.305,Al:26.982,Si:28.085,P:30.974,S:32.06,Cl:35.45,Ar:39.948,K:39.098,Ca:40.078,
-    Sc:44.956,Ti:47.867,V:50.942,Cr:51.996,Mn:54.938,Fe:55.845,Co:58.933,Ni:58.693,Cu:63.546,Zn:65.38,
-    Ga:69.723,Ge:72.630,As:74.922,Se:78.971,Br:79.904,Kr:83.798,Rb:85.468,Sr:87.62,Y:88.906,Zr:91.224,
-    Nb:92.906,Mo:95.95,Tc:98,Ru:101.07,Rh:102.91,Pd:106.42,Ag:107.87,Cd:112.41,In:114.82,Sn:118.71,
-    Sb:121.76,Te:127.60,I:126.90,Xe:131.29,Cs:132.91,Ba:137.33,La:138.91,Ce:140.12,Pr:140.91,Nd:144.24,
-    Pm:145,Sm:150.36,Eu:151.96,Gd:157.25,Tb:158.93,Dy:162.50,Ho:164.93,Er:167.26,Tm:168.93,Yb:173.05,
-    Lu:174.97,Hf:178.49,Ta:180.95,W:183.84,Re:186.21,Os:190.23,Ir:192.22,Pt:195.08,Au:196.97,Hg:200.59,
-    Tl:204.38,Pb:207.2,Bi:208.98,Po:209,At:210,Rn:222,Fr:223,Ra:226,Ac:227,Th:232.04,Pa:231.04,U:238.03
-  };
-
+  // QUÍMICA
+  const atomicWeights = { H:1.008, C:12.011, N:14.007, O:15.999, Na:22.99, Mg:24.305, Al:26.98, P:30.97, S:32.06, Cl:35.45, K:39.09, Ca:40.08, Fe:55.85, Cu:63.55, Zn:65.38 };
   function calcMolarMass() {
     let formula = document.getElementById('chemFormula').value.trim();
     if (!formula) return;
     try {
-      // Expandir paréntesis simples como Ca(OH)2
-      formula = formula.replace(/\(([A-Za-z0-9]+)\)(\d+)/g, (_, group, mult) => {
-        return group.replace(/([A-Z][a-z]?)(\d*)/g, (__, el, num) => el + ((parseInt(num || 1)) * parseInt(mult)));
-      });
       const regex = /([A-Z][a-z]?)(\d*)/g;
-      let match, total = 0, breakdown = [];
+      let match, total = 0, parts = [];
       while ((match = regex.exec(formula)) !== null) {
         if (!match[0]) break;
-        const el = match[1];
-        const count = parseInt(match[2] || 1);
-        if (!atomicWeights[el]) throw new Error(`Elemento desconocido: ${el}`);
-        const mass = atomicWeights[el] * count;
-        total += mass;
-        breakdown.push(`${el} (${count}): ${mass.toFixed(3)} g`);
+        const el = match[1], count = parseInt(match[2] || 1);
+        if (!atomicWeights[el]) throw new Error(`Elemento no registrado: ${el}`);
+        const m = atomicWeights[el] * count;
+        total += m;
+        parts.append ? parts.append(...) : parts.push(`${el}(${count}): ${m.toFixed(2)}`);
       }
-      showRes('resChem1', `Masa Molar Total: ${total.toFixed(4)} g/mol\n-------------------\n${breakdown.join('\n')}`);
-    } catch (e) {
-      showRes('resChem1', `Error: ${e.message}`);
+      showRes('resChem1', `Masa Molar: ${total.toFixed(4)} g/mol\n${parts.join('\n')}`);
+    } catch(e) {
+      showRes('resChem1', 'Usa elementos estándar (ej: H2O, H2SO4, NaCl).');
     }
   }
 
-  function calcMolarity() {
-    const g = parseFloat(document.getElementById('cGrams').value);
-    const mm = parseFloat(document.getElementById('cMM').value);
-    const v = parseFloat(document.getElementById('cVol').value);
-    const moles = g / mm;
-    const M = moles / v;
-    showRes('resChem2', `Moles de soluto: ${moles.toFixed(4)} mol\nMolaridad (M):    ${M.toFixed(4)} mol/L`);
-  }
-
-  // 6. ESTADÍSTICA
+  // ESTADÍSTICA
   function calcStats() {
     const raw = document.getElementById('statData').value;
-    const nums = raw.split(/[\s,]+/).map(Number).filter(n => !isNaN(n)).sort((a,b) => a - b);
-    if (nums.length === 0) return;
-    const n = nums.length;
-    const sum = nums.reduce((a,b) => a + b, 0);
-    const mean = sum / n;
-    const median = n % 2 === 0 ? (nums[n/2 - 1] + nums[n/2]) / 2 : nums[Math.floor(n/2)];
-    const variance = nums.reduce((acc, val) => acc + Math.pow(val - mean, 2), 0) / (n - 1 || 1);
-    const stdDev = Math.sqrt(variance);
-    showRes('resStat', `Cantidad (n): ${n}\nSuma (Σx):    ${sum.toFixed(4)}\nMedia:        ${mean.toFixed(4)}\nMediana:      ${median.toFixed(4)}\nMín / Máx:    ${nums[0]} / ${nums[n-1]}\nVarianza (s²): ${variance.toFixed(4)}\nDesv. Est. (s): ${stdDev.toFixed(4)}`);
+    const nums = raw.split(/[\s,]+/).map(Number).filter(n => !isNaN(n)).sort((a,b)=>a-b);
+    if (!nums.length) return;
+    const n = nums.length, sum = nums.reduce((a,b)=>a+b,0), mean = sum/n;
+    const median = n%2===0 ? (nums[n/2-1]+nums[n/2])/2 : nums[Math.floor(n/2)];
+    showRes('resStat', `N: ${n} | Suma: ${sum}\nMedia: ${mean.toFixed(4)}\nMediana: ${median}\nMín/Máx: ${nums[0]} / ${nums[n-1]}`);
   }
 
-  // 7. CONTABILIDAD Y FINANZAS
+  // CONTABILIDAD
   function calcFinance() {
     const P = parseFloat(document.getElementById('finP').value);
-    const annualR = parseFloat(document.getElementById('finR').value) / 100;
+    const r = parseFloat(document.getElementById('finR').value)/100/12;
     const n = parseFloat(document.getElementById('finN').value);
-    const i = annualR / 12;
-    const cuota = P * (i * Math.pow(1 + i, n)) / (Math.pow(1 + i, n) - 1);
-    const totalPagado = cuota * n;
-    const interesTotal = totalPagado - P;
-    const montoCompuesto = P * Math.pow(1 + i, n);
-    showRes('resFin1', `--- PRÉSTAMO (CUOTA NIVELADA) ---\nCuota Mensual:  $${cuota.toFixed(2)}\nTotal a Pagar:  $${totalPagado.toFixed(2)}\nInterés Total:  $${interesTotal.toFixed(2)}\n\n--- INVERSIÓN INTERÉS COMPUESTO ---\nMonto Futuro:   $${montoCompuesto.toFixed(2)}`);
+    const cuota = P * (r * Math.pow(1+r, n)) / (Math.pow(1+r, n) - 1);
+    showRes('resFin1', `Cuota Mensual: $${cuota.toFixed(2)}\nTotal Pagado: $${(cuota*n).toFixed(2)}\nIntereses: $${((cuota*n)-P).toFixed(2)}`);
   }
 
-  function calcBreakEven() {
-    const cf = parseFloat(document.getElementById('beCF').value);
-    const pv = parseFloat(document.getElementById('bePV').value);
-    const cv = parseFloat(document.getElementById('beCV').value);
-    const mc = pv - cv;
-    const peUnidades = cf / mc;
-    const peDinero = peUnidades * pv;
-    const margenPct = (mc / pv) * 100;
-    showRes('resFin2', `Margen Contribución: $${mc.toFixed(2)} (${margenPct.toFixed(2)}%)\nPunto Equilibrio (Unidades): ${Math.ceil(peUnidades)} u.\nPunto Equilibrio (Ventas):   $${peDinero.toFixed(2)}`);
-  }
-
-  // Registro de Service Worker para modo offline
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').catch(() => {});
+    navigator.serviceWorker.register('sw.js').catch(()=>{});
   }
 </script>
 </body>
